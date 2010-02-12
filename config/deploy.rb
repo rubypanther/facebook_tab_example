@@ -20,9 +20,17 @@ role :db,  "facebook.rubypanther.com", :primary => true # This is where Rails mi
 namespace :deploy do
   task :start do ; end
   task :stop do ; end
+
+  desc "Reload the app in passenger"
   task :restart, :roles => :app, :except => { :no_release => true } do
     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
   end
+  
+  desc "Restart apache"
+  task :restart_apache, :roles => :web do
+    run "#{try_sudo} apachectl graceful"
+  end
+  after :cold, :restart_apache
   
   desc "Symlink database.yml"
   task :symlink_db, :roles => :web do
@@ -32,7 +40,7 @@ namespace :deploy do
   
   desc "Symlink apache config"
   task :symlink_apache, :roles => :web do
-    run "sudo ln -sf #{release_path}/config/apache.conf #{apache_conf_dir}/#{application.parameterize.underscore}.conf"
+    run "#{try_sudo} ln -sf #{release_path}/config/apache.conf #{apache_conf_dir}/#{application.parameterize.underscore}.conf"
   end
   
 end
