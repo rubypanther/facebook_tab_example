@@ -1,0 +1,6 @@
+db/schema.rb
+config/database.yml
+tmp/*
+log
+REVISION
+log/*
