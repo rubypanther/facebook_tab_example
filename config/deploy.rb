@@ -1,5 +1,8 @@
 set :application, "facebook_blog_tab"
 set :repository,  "paris@rubypanther.com:/home/paris/git/facebook_blog_tab.git"
+set :deploy_to, "/home/paris/sites/#{application}"
+set :user, "paris"
+set :use_sudo, false
 
 set :scm, :git
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
@@ -19,9 +22,10 @@ namespace :deploy do
   task :restart, :roles => :app, :except => { :no_release => true } do
     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
   end
-end
-
-desc "Symlink database.yml"
-task :after_symlink, :roles => :web do
-  run "ln -nfs #{release_path}/config/database.example.yml #{release_path}/config/database.yml"
+  
+  desc "Symlink database.yml"
+  task :symlink_db, :roles => :web do
+    run "ln -nfs #{release_path}/config/database.example.yml #{release_path}/config/database.yml"
+  end
+  after :symlink, :symlink_db
 end
