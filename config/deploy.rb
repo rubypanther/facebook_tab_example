@@ -3,6 +3,7 @@ set :repository,  "paris@rubypanther.com:/home/paris/git/facebook_blog_tab.git"
 set :deploy_to, "/home/paris/sites/#{application}"
 set :user, "paris"
 set :use_sudo, false
+set :apache_conf_dir, "/etc/httpd/conf.d"
 
 set :scm, :git
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
@@ -28,4 +29,10 @@ namespace :deploy do
     run "ln -nfs #{release_path}/config/database.example.yml #{release_path}/config/database.yml"
   end
   after :symlink, :symlink_db
+  
+  desc "Symlink apache config"
+  task :symlink_apache, :roles => :web do
+    run "sudo ln -sf #{release_path}/config/apache.conf #{apache_conf_dir}/#{application.parameterize.underscore}.conf"
+  end
+  
 end
