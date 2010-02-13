@@ -4,6 +4,6 @@ class BlogTabController < ApplicationController
 
   def tab
     @rss = RSS::Parser.parse(open("http://gror.blogspot.com/feeds/posts/default").read, false)
-    render :text => @rss.items.collect{|i|i.title.content }.join("<br/>")
+    render :text => "<ul>"+ @rss.items.collect{|i|"<li>%s</li>" % i.title.content }.join("<br/>") + "</ul>"
   end
 end
