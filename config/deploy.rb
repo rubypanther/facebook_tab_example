@@ -30,17 +30,18 @@ namespace :deploy do
   task :restart_apache, :roles => :web do
     sudo "apachectl graceful", :pty => true
   end
-  after :cold, :restart_apache
   
   desc "Symlink database.yml"
   task :symlink_db, :roles => :web do
-    run "ln -nfs #{release_path}/config/database.example.yml #{release_path}/config/database.yml"
+    run "ln -nfs #{deploy_to}/current/config/database.example.yml #{deploy_to}/current/config/database.yml"
   end
-  after :symlink, :symlink_db
   
   desc "Symlink apache config"
   task :symlink_apache, :roles => :web do
     sudo "ln -sf #{deploy_to}/current/config/apache.conf #{apache_conf_dir}/#{application}.conf", :pty => true
   end
+  after :symlink_apache, :restart_apache
   
 end
+
+after :deploy, :symlink_db
