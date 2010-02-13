@@ -1,5 +1,6 @@
 class BlogTabController < ApplicationController
   def index
+    ensure_application_is_installed_by_facebook_user
   end
 
   def tab
