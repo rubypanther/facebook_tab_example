@@ -28,7 +28,7 @@ namespace :deploy do
   
   desc "Restart apache"
   task :restart_apache, :roles => :web do
-    run "sudo apachectl graceful"
+    sudo "apachectl graceful", :pty => true
   end
   after :cold, :restart_apache
   
@@ -40,7 +40,7 @@ namespace :deploy do
   
   desc "Symlink apache config"
   task :symlink_apache, :roles => :web do
-    run "ln -sf #{deploy_to}/current/config/apache.conf #{apache_conf_dir}/#{application}.conf"
+    sudo "ln -sf #{deploy_to}/current/config/apache.conf #{apache_conf_dir}/#{application}.conf", :pty => true
   end
   
 end
