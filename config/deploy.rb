@@ -44,4 +44,4 @@ namespace :deploy do
   
 end
 
-after :deploy, :symlink_db
+after :deploy, :'deploy:symlink_db'
