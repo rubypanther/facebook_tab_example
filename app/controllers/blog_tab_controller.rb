@@ -3,6 +3,6 @@ class BlogTabController < ApplicationController
   end
 
   def tab
-    render :text => 'TAAAAB'
+    @rss = rss = RSS::Parser.parse(open("http://gror.blogspot.com/feeds/posts/default").read, false)
   end
 end
