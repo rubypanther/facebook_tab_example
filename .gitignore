@@ -4,3 +4,4 @@ tmp/*
 log
 REVISION
 log/*
+config/facebooker.yml
