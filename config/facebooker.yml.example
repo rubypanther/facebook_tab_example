@@ -1,0 +1,38 @@
+development:
+ api_key: XXXXX...
+ secret_key: XXXXX...
+ canvas_page_name: facebook_blog_tab
+ callback_url: http://facebook.rubypanther.com/blog_tab/
+ pretty_errors: true
+ set_asset_host_to_callback_url: false
+ # tunnel:
+ #     public_host_username: fooberryfoo
+ #     public_host: staging.travelerstable.com
+ #     public_port: 8888
+ #     local_port: 3000
+ #     server_alive_interval: 0
+test:
+  api_key: XXXXX...
+  secret_key: XXXXX...
+  canvas_page_name:
+  pretty_errors: true
+  set_asset_host_to_callback_url: false
+  # tunnel:
+  #   public_host_username:
+  #   public_host:
+  #   public_port: 4007
+  #   local_port: 3000
+  #   server_alive_interval: 0
+production:
+  api_key: XXXXX... 
+  secret_key: XXXXX...
+  canvas_page_name:
+  callback_url: http://facebook.rubypanther.com/blog_tab/
+  pretty_errors: true
+  set_asset_host_to_callback_url: false
+  # tunnel:
+  #   public_host_username:
+  #   public_host:
+  #   public_port: 4007
+  #   local_port: 3000
+  #   server_alive_interval: 0
