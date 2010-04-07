@@ -3,3 +3,5 @@ A basic example of a facebook app that displays an RSS feed in a tab.
 There is not any documentation, or tests.
 
 This is not a plugin or an application, it is just a quick test of functionality that I'm putting online as an example.
+
+You'll need to add a config/facebooker.yml
